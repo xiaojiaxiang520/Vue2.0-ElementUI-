@@ -72,9 +72,25 @@ export default {
             collapse: false,
             items: [
                 {
+                  //0
                     icon: 'el-icon-monitor',
                     index: 'dashboard',
                     title: '系统首页'
+                },
+                {
+                  icon: 'el-icon-notebook-2',
+                  index: '1',
+                  title: '作业管理',
+                  subs: [
+                    {
+                      index: 'course',
+                      title: '课程管理'
+                    },
+                    {
+                      index: 'taskUpload',
+                      title: '作业上传'
+                    },
+                  ]
                 },
                 {
                     icon: 'el-icon-lx-cascades',
@@ -88,7 +104,7 @@ export default {
                 },
                 {
                     icon: 'el-icon-lx-calendar',
-                    index: '3',
+                    index: '4',
                     title: '表单相关',
                     subs: [
                         {

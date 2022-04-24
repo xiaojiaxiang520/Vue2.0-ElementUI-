@@ -44,6 +44,17 @@ export default new Router({
           path: '/403',
           component: () => import(/* webpackChunkName: "403" */ '../components/page/403.vue'),
           meta: { title: '403' }
+        },
+        {
+          path: '/course',
+          component: () => import(/* webpackChunkName: "403" */ '../components/page/CourseManage.vue'),
+          meta: { title: '课程管理' }
+        },
+        ,
+        {
+          path: '/taskupload',
+          component: () => import(/* webpackChunkName: "403" */ '../components/page/TaskUpload.vue'),
+          meta: { title: '作业上传' }
         }
       ]
     },
