@@ -5,10 +5,11 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
+  mode: "history",
   routes: [
     {
       path: '/',
-      redirect: '/dashboard'
+      redirect: '/dashboard',//表示重定向
     },
     {
       path: '/',
@@ -55,6 +56,11 @@ export default new Router({
           path: '/taskupload',
           component: () => import(/* webpackChunkName: "403" */ '../components/page/TaskUpload.vue'),
           meta: { title: '作业上传' }
+        },
+        {
+          path: '/tasktable',
+          component: () => import(/* webpackChunkName: "403" */ '../components/page/TaskManage.vue'),
+          meta: { title: '作业管理' }
         }
       ]
     },

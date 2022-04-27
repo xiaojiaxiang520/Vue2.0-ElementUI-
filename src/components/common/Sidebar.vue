@@ -85,6 +85,9 @@ export default {
                     {
                       index: 'course',
                       title: '课程管理'
+                    },{
+                      index:'tasktable',
+                      title: '作业管理'
                     },
                     {
                       index: 'taskUpload',
@@ -92,38 +95,39 @@ export default {
                     },
                   ]
                 },
-                {
-                    icon: 'el-icon-lx-cascades',
-                    index: 'table',
-                    title: '基础表格'
-                },
-                {
-                    icon: 'el-icon-lx-copy',
-                    index: 'tabs',
-                    title: 'tab选项卡'
-                },
-                {
-                    icon: 'el-icon-lx-calendar',
-                    index: '4',
-                    title: '表单相关',
-                    subs: [
-                        {
-                            index: 'form',
-                            title: '基本表单'
-                        }
-                    ]
-                },
-                {
-                    icon: 'el-icon-lx-warn',
-                    index: '5',
-                    title: '错误处理',
-                    subs: [
-                        {
-                            index: '404',
-                            title: '404页面'
-                        }
-                    ]
-                }
+                //
+                // {
+                //     icon: 'el-icon-lx-cascades',
+                //     index: 'table',
+                //     title: '基础表格'
+                // },
+                // {
+                //     icon: 'el-icon-lx-copy',
+                //     index: 'tabs',
+                //     title: 'tab选项卡'
+                // },
+                // {
+                //     icon: 'el-icon-lx-calendar',
+                //     index: '4',
+                //     title: '表单相关',
+                //     subs: [
+                //         {
+                //             index: 'form',
+                //             title: '基本表单'
+                //         }
+                //     ]
+                // },
+                // {
+                //     icon: 'el-icon-lx-warn',
+                //     index: '5',
+                //     title: '错误处理',
+                //     subs: [
+                //         {
+                //             index: '404',
+                //             title: '404页面'
+                //         }
+                //     ]
+                // }
             ]
         };
     },

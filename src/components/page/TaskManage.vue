@@ -22,10 +22,10 @@
                     <el-option key="2" label="已关闭" value="湖南省"></el-option>
                 </el-select>
 <!--              v-model是用于绑定，placeholder是输入框占位符-->
-                <el-input v-model="query.name" placeholder="课程名称" class="handle-input mr10"></el-input>
+                <el-input v-model="query.name" placeholder="作业名称" class="handle-input mr10"></el-input>
 <!--              两个按钮-->
                 <el-button type="primary" icon="el-icon-search" @click="handleSearch" disabled>搜索</el-button>
-                <el-button class="moveleft" type="primary" icon="el-icon-plus" @click="addEdit">新增</el-button>
+                <el-button class="moveleft" type="primary" icon="el-icon-plus" @click="addEdit" disabled>新增</el-button>
             </div>
 <!--          表体
             data：数据 border：是否带有纵向边框 ref是焦点 header-cell-class-name：表头单元格的 className 的回调方法，也可以使用字符串为所有表头单元格设置一个固定的 className。
@@ -44,18 +44,23 @@
 <!--              多选框-->
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
 <!--              id-->
-                <el-table-column prop="courseId" label="ID" width="55" align="center"></el-table-column>
+                <el-table-column prop="taskId" label="ID" width="55" align="center"></el-table-column>
 <!--              -->
-                <el-table-column prop="name" label="课程名"></el-table-column>
-                <el-table-column label="课程作业">
-                    <template slot-scope="scope">{{scope.row.count}}</template>
+                <el-table-column prop="taskName" label="作业名称"></el-table-column>
+                <el-table-column label="所属课程">
+                    <template slot-scope="scope">{{scope.row.courseName}}</template>
                 </el-table-column>
+              <el-table-column prop="" label="作业链接">
+                <template slot-scope="scope">
+                  <el-link :href=scope.row.taskUrl type="primary">下载链接</el-link>
+                </template>
+              </el-table-column>
 
-                <el-table-column prop="download" label="下载次数"></el-table-column>
+              <el-table-column prop="download" label="下载次数"></el-table-column>
                 <el-table-column label="状态" align="center">
                     <template slot-scope="scope">
 <!--                      关闭开启标签-->
-                        <el-tag v-if=scope.row.courseState type="success">开启</el-tag>
+                        <el-tag v-if=scope.row.taskState type="success">开启</el-tag>
                         <el-tag v-else type="danger">关闭</el-tag>
                     </template>
                 </el-table-column>
@@ -98,12 +103,12 @@
         <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
             <el-form ref="form" :model="form" label-width="70px">
                 <el-form-item label="课程名">
-                    <el-input v-model="form.name"></el-input>
+                    <el-input v-model="form.taskName"></el-input>
                 </el-form-item>
                 <el-form-item label="启动状态">
                     <el-switch
                       style="display: block; margin-top: 5px"
-                      v-model="form.courseState"
+                      v-model="form.taskState"
                       active-color="#13ce66"
                       inactive-color="#ff4949"
                       active-text="开启"
@@ -213,7 +218,7 @@ export default {
                     this.tableData.splice(index, 1);
                     this.pageTotal--;
                     console.log(row)
-                    this.deleteGet(row.courseId);
+                    this.deleteGet(row.taskId);
                 })//捕捉异常
                 .catch(() => {});
         },
@@ -247,7 +252,7 @@ export default {
               }
             }
         },
-        // 编辑操作
+        // zuoye编辑操作
         handleEdit(index, row) {
             //标题
             this.idx = index;
@@ -291,10 +296,10 @@ export default {
             this.$set(this.query, 'pageIndex', val);
             this.getselect();
         },
-      //查询数据
+      //查询数据，页面开始的时候
         getselect(){
 
-          this.rq.requests.get('/zz/admin/selectCourse',{
+          this.rq.requests.get('/zz/admin/findTaskLimit',{
             params:{
               Limit:(this.query.pageIndex-1)*10
             }
@@ -302,9 +307,9 @@ export default {
             //获得到数据
 
             console.log("获取数据成功：")
-            console.log(response.data.data.courses)
+            console.log(response.data.data.tasks)
 
-            this.tableData = response.data.data.courses;
+            this.tableData = response.data.data.tasks;
             this.pageTotal=(response.data.data.count);
 
           }.bind(this)).catch(function (error){
@@ -314,11 +319,11 @@ export default {
         },
         //修改数据
         updateGet(form){
-          this.rq.requests.get('/zz/admin/updateCourse',{
+          this.rq.requests.get('/zz/admin/updateTask',{
             params:{
-              CourseId:form.courseId,
-              Name:form.name,
-              CourseState:form.courseState
+              TaskId:form.taskId,
+              TaskName:form.taskName,
+              TaskState:form.taskState
             }
           }).then(function (response){
             //获得到数据
@@ -328,9 +333,9 @@ export default {
           })
         },
         //新增数据
-        addCourseGet(addform)
+        addCourseGet1(addform)
         {
-          this.rq.requests.get('/zz/admin/addCourse',{
+          this.rq.requests.get('/zz/admin/deleteTask',{
             params:{
               Name:addform.name,
               CourseState:addform.courseState
@@ -344,9 +349,9 @@ export default {
         },
         deleteGet(id)
         {
-          this.rq.requests.get('/zz/admin/deleteCourse',{
+          this.rq.requests.get('/zz/admin/deleteTask',{
             params:{
-              CourseId:id,
+              TaskId:id,
             }
           }).then(function (response){
             //获得到数据

@@ -13,13 +13,13 @@
                         type="password"
                         placeholder="password"
                         v-model="param.password"
-                        @keyup.enter.native="submitForm()"
+                        @keyup.enter.native="submitGet()"
                     >
                         <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
                     </el-input>
                 </el-form-item>
                 <div class="login-btn">
-                    <el-button type="primary" @click="submitForm()">登录</el-button>
+                    <el-button type="primary" @click="submitGet()">登录</el-button>
                 </div>
                 <p class="login-tips">Tips : 用户名和密码随便填。</p>
             </el-form>
@@ -46,6 +46,7 @@ export default {
             this.$refs.login.validate(valid => {
                 if (valid) {
                     this.$message.success('登录成功');
+                    //本地的localStorage
                     localStorage.setItem('ms_username', this.param.username);
                     this.$router.push('/');
                 } else {
@@ -55,6 +56,33 @@ export default {
                 }
             });
         },
+        submitGet(){
+            let token = "123-34-53"
+            this.rq.requests.get('/zz/admin/login',{
+              params:{
+                username:this.param.username,
+                password:this.param.password
+              }
+              ,
+            }).then(function (response){
+              //获得到数据
+
+              //登录成功
+              if(response.data.code === 200)
+              {
+                localStorage.setItem('token',response.data.data.token)
+                localStorage.setItem('ms_username', response.data.data.user.username);
+
+                //设置当前路由的地址为/
+                this.$router.push('/');
+              }else {
+                this.$message.error('账号或密码错误，请重新登录！');
+              }
+            }.bind(this)).catch(function (error){
+              //
+              console.log(error)
+            })
+        }
     },
 };
 </script>

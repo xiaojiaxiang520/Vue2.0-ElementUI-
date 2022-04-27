@@ -7,6 +7,12 @@ export const fetchData = query => {
         params: query
     });
 };
+// export const courseSelect = query=>{
+//     return request({
+//       url: '',
+//       method:
+//     });
+// }
 /*
 *方式1：
 * import {require} from './network/request'
