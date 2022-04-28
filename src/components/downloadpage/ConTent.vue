@@ -3,7 +3,6 @@
     <el-row :gutter="20">
       <el-link type="primary" style="font-size:30px" disabled>Java作业</el-link>
     </el-row>
-
     <el-col :span="14" :offset="5">
       <div class="grid-content bg-purple">
         <el-row :gutter="20">

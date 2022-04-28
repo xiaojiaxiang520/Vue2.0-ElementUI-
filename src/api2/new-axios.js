@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import router from '../router/index'
 
 // 创建 axios 实例
 const requests = axios.create({
@@ -46,19 +46,20 @@ requests.interceptors.request.use(config => {
 
 
 // response interceptor（接收拦截器）
-// requests.interceptors.response.use((response) => {
-//   const res = response.data
-//   if (res.code !== 0&&res.code!==200) {
-//     Notify({ type: 'danger', message: res.message||res.msg });
-//     // 401:未登录;
-//     if (res.code === 401||res.code === 403||res.code===999) {
-//       Notify({ type: 'danger', message: '请登录'});
-//     }
-//     return Promise.reject('error')
-//   } else {
-//     return res
-//   }
-// }, err)
+requests.interceptors.response.use((response) => {
+  //获取到数据
+  const res = response.data
+  //判断是否状态码是否正常
+  if (res.code == 205||res.code==206) {
+    //返回登录页面
+    console.log(res.code)
+    // this.$router.push('/login');
+    router.push('/login');
+    // return Promise.reject('error')
+  } else {
+    return response
+  }
+})
 
 
 

@@ -96,6 +96,19 @@ export default {
     },
     onSubmit() {
       //开始上传
+      if(this.form.name==="")
+      {
+        this.tishi("警告哦，作业名称不能为空!");
+        return;
+      }else if(this.form.courseid==="")
+      {
+        this.tishi("警告哦，课程类型不能为空!");
+        return;
+      } else if(this.listfile.length<1)
+      {
+        this.tishi("警告哦，请上传一个文件!");
+        return;
+      }
       console.log('submit!');
       var formdata = new FormData();//创建FormData对象
       var form2 = new Object();
@@ -123,6 +136,13 @@ export default {
         }
       }
     },
+    tishi(data){
+      this.$message({
+        message: data,
+        type: 'warning'
+      });
+    },
+
     //上传文件前
     beforefile(file)
     {

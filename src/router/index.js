@@ -7,17 +7,27 @@ Vue.use(Router)
 export default new Router({
   mode: "history",
   routes: [
+
     {
-      path: '/',
-      redirect: '/dashboard',//表示重定向
+      path:'/',
+      redirect: '/index'
     },
     {
-      path: '/',
+      path: '/index',
+      component: () => import('../components/downloadpage/Index'),
+      meta: {title: '作业系统'}
+    },
+    {
+      path: '/admin',
+      redirect: '/admin/dashboard',//表示重定向
+    },
+    {
+      path: '/admin',//这个表示首页
       component: () => import(/* webpackChunkName: "home" */ '../components/common/Home.vue'),
       meta: { title: '自述文件' },
       children: [
         {
-          path: '/dashboard',
+          path: '/admin/dashboard',
           component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Dashboard.vue'),
           meta: { title: '系统首页' }
         },
@@ -47,18 +57,18 @@ export default new Router({
           meta: { title: '403' }
         },
         {
-          path: '/course',
+          path: '/admin/course',
           component: () => import(/* webpackChunkName: "403" */ '../components/page/CourseManage.vue'),
           meta: { title: '课程管理' }
         },
         ,
         {
-          path: '/taskupload',
+          path: '/admin/taskupload',
           component: () => import(/* webpackChunkName: "403" */ '../components/page/TaskUpload.vue'),
           meta: { title: '作业上传' }
         },
         {
-          path: '/tasktable',
+          path: '/admin/tasktable',
           component: () => import(/* webpackChunkName: "403" */ '../components/page/TaskManage.vue'),
           meta: { title: '作业管理' }
         }

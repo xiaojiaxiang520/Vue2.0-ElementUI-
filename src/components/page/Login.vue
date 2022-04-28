@@ -32,8 +32,8 @@ export default {
     data: function() {
         return {
             param: {
-                username: 'admin',
-                password: '123123',
+                username: '',
+                password: '',
             },
             rules: {
                 username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -42,22 +42,12 @@ export default {
         };
     },
     methods: {
-        submitForm() {
-            this.$refs.login.validate(valid => {
-                if (valid) {
-                    this.$message.success('登录成功');
-                    //本地的localStorage
-                    localStorage.setItem('ms_username', this.param.username);
-                    this.$router.push('/');
-                } else {
-                    this.$message.error('请输入账号和密码');
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
-        },
         submitGet(){
-            let token = "123-34-53"
+            if(this.param.username===''||this.param.password===''||this.param.password===null||this.param.username===null)
+            {
+              this.tishi("账号密码不能为空.");
+              return;
+            }
             this.rq.requests.get('/zz/admin/login',{
               params:{
                 username:this.param.username,
@@ -74,7 +64,7 @@ export default {
                 localStorage.setItem('ms_username', response.data.data.user.username);
 
                 //设置当前路由的地址为/
-                this.$router.push('/');
+                this.$router.push('/admin');
               }else {
                 this.$message.error('账号或密码错误，请重新登录！');
               }
@@ -82,7 +72,13 @@ export default {
               //
               console.log(error)
             })
-        }
+        },
+        tishi(data){
+          this.$message({
+            message: data,
+            type: 'warning'
+          });
+        },
     },
 };
 </script>
