@@ -7,7 +7,7 @@
     <el-form-item label="课程类型">
       <el-select v-model="form.courseid" placeholder="请选中对应的科目">
 <!--        <el-option label="Java" value="1"></el-option>-->
-        <el-option v-for="(item,i) in typelist.data" :label=item.name :value=item.courseId :key="i"></el-option>
+        <el-option v-for="(item,i) in typelist.data" :label=item.Name :value=item.CourseId :key="i"></el-option>
 
 <!--        <el-option label="软件工程" value="2"></el-option>-->
       </el-select>

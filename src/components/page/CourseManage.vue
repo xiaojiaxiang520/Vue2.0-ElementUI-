@@ -46,21 +46,21 @@
 <!--              id-->
                 <el-table-column prop="courseId" label="ID" width="55" align="center"></el-table-column>
 <!--              -->
-                <el-table-column prop="name" label="课程名"></el-table-column>
+                <el-table-column prop="Name" label="课程名"></el-table-column>
                 <el-table-column label="课程作业">
-                    <template slot-scope="scope">{{scope.row.count}}</template>
+                    <template slot-scope="scope">{{scope.row.Count}}</template>
                 </el-table-column>
 
-                <el-table-column prop="download" label="下载次数"></el-table-column>
+                <el-table-column prop="Download" label="下载次数"></el-table-column>
                 <el-table-column label="状态" align="center">
                     <template slot-scope="scope">
 <!--                      关闭开启标签-->
-                        <el-tag v-if=scope.row.courseState type="success">开启</el-tag>
+                        <el-tag v-if=scope.row.CourseState type="success">开启</el-tag>
                         <el-tag v-else type="danger">关闭</el-tag>
                     </template>
                 </el-table-column>
 
-                <el-table-column prop="newTime" label="创建时间"></el-table-column>
+                <el-table-column prop="NewTime" label="创建时间"></el-table-column>
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
 <!--                      编辑按钮-->
@@ -98,12 +98,12 @@
         <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
             <el-form ref="form" :model="form" label-width="70px">
                 <el-form-item label="课程名">
-                    <el-input v-model="form.name"></el-input>
+                    <el-input v-model="form.Name"></el-input>
                 </el-form-item>
                 <el-form-item label="启动状态">
                     <el-switch
                       style="display: block; margin-top: 5px"
-                      v-model="form.courseState"
+                      v-model="form.CourseState"
                       active-color="#13ce66"
                       inactive-color="#ff4949"
                       active-text="开启"
@@ -213,7 +213,7 @@ export default {
                     this.tableData.splice(index, 1);
                     this.pageTotal--;
                     console.log(row)
-                    this.deleteGet(row.courseId);
+                    this.deleteGet(row.CourseId);
                 })//捕捉异常
                 .catch(() => {});
         },
@@ -316,9 +316,9 @@ export default {
         updateGet(form){
           this.rq.requests.get('/zz/admin/updateCourse',{
             params:{
-              CourseId:form.courseId,
-              Name:form.name,
-              CourseState:form.courseState
+              CourseId:form.CourseId,
+              Name:form.Name,
+              CourseState:form.CourseState
             }
           }).then(function (response){
             //获得到数据

@@ -44,23 +44,23 @@
 <!--              多选框-->
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
 <!--              id-->
-                <el-table-column prop="taskId" label="ID" width="55" align="center"></el-table-column>
+                <el-table-column prop="TaskId" label="ID" width="55" align="center"></el-table-column>
 <!--              -->
-                <el-table-column prop="taskName" label="作业名称"></el-table-column>
+                <el-table-column prop="TaskName" label="作业名称"></el-table-column>
                 <el-table-column label="所属课程">
-                    <template slot-scope="scope">{{scope.row.courseName}}</template>
+                    <template slot-scope="scope">{{scope.row.CourseName}}</template>
                 </el-table-column>
               <el-table-column prop="" label="作业链接">
                 <template slot-scope="scope">
-                  <el-link :href=scope.row.taskUrl type="primary">下载链接</el-link>
+                  <el-link :href=scope.row.TaskUrl type="primary">下载链接</el-link>
                 </template>
               </el-table-column>
 
-              <el-table-column prop="download" label="下载次数"></el-table-column>
+              <el-table-column prop="Download" label="下载次数"></el-table-column>
                 <el-table-column label="状态" align="center">
                     <template slot-scope="scope">
 <!--                      关闭开启标签-->
-                        <el-tag v-if=scope.row.taskState type="success">开启</el-tag>
+                        <el-tag v-if=scope.row.TaskState type="success">开启</el-tag>
                         <el-tag v-else type="danger">关闭</el-tag>
                     </template>
                 </el-table-column>
@@ -103,12 +103,12 @@
         <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
             <el-form ref="form" :model="form" label-width="70px">
                 <el-form-item label="课程名">
-                    <el-input v-model="form.taskName"></el-input>
+                    <el-input v-model="form.TaskName"></el-input>
                 </el-form-item>
                 <el-form-item label="启动状态">
                     <el-switch
                       style="display: block; margin-top: 5px"
-                      v-model="form.taskState"
+                      v-model="form.TaskState"
                       active-color="#13ce66"
                       inactive-color="#ff4949"
                       active-text="开启"
@@ -218,7 +218,7 @@ export default {
                     this.tableData.splice(index, 1);
                     this.pageTotal--;
                     console.log(row)
-                    this.deleteGet(row.taskId);
+                    this.deleteGet(row.TaskId);
                 })//捕捉异常
                 .catch(() => {});
         },
@@ -321,9 +321,9 @@ export default {
         updateGet(form){
           this.rq.requests.get('/zz/admin/updateTask',{
             params:{
-              TaskId:form.taskId,
-              TaskName:form.taskName,
-              TaskState:form.taskState
+              TaskId:form.TaskId,
+              TaskName:form.TaskName,
+              TaskState:form.TaskState
             }
           }).then(function (response){
             //获得到数据

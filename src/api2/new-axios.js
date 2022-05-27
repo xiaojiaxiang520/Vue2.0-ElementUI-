@@ -4,7 +4,7 @@ import router from '../router/index'
 // 创建 axios 实例
 const requests = axios.create({
   // baseURL: process.env.VUE_APP_API, // 基础url,如果是多环境配置这样写，也可以像下面一行的写死。
-  baseURL: 'http://www.biunm.com:8081',
+  baseURL: 'http://localhost:8081',
   timeout: 5000, // 请求超时时间,
 })
 

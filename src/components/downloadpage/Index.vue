@@ -10,9 +10,9 @@
 
         <div class="grid-content bg-purple">
           <el-row :gutter="20">
-            <el-col :span="6" v-for="i in courselist" :key="i.courseId" class="overflow">
-              <div class="grid-content bg-purple2 _text_1 _min_height overflow" v-on:click="cli(i.name,i.courseId)"   style="cursor:pointer">
-                {{i.name}}
+            <el-col :span="6" v-for="i in courselist" :key="i.CourseId" class="overflow">
+              <div class="grid-content bg-purple2 _text_1 _min_height overflow" v-on:click="cli(i.Name,i.CourseId)"   style="cursor:pointer">
+                {{ i.Name }}
               </div>
             </el-col>
           </el-row>
@@ -20,11 +20,11 @@
 
           </el-divider>
           <el-row :gutter="20">
-            <el-col :span="6" v-for="(i,index) in tasklist"  :key="i.taskId" class="cont">
-              <div class="grid-content bg-purple3 _min_height item" v-on:click="cli2(i.taskUrl)" style="cursor:pointer">
+            <el-col :span="6" v-for="(i,index) in tasklist"  :key="i.TaskId" class="cont">
+              <div class="grid-content bg-purple3 _min_height item" v-on:click="cli2(i.TaskUrl)" style="cursor:pointer">
                 <div style="margin-left:  -60px;width: 200px">
                   <i class="el-icon-tickets" style="font-size: 22px"></i>
-                  {{i.taskName}}
+                  {{ i.TaskName }}
                 </div>
                 <div v-if="index==0" class="lable11">最新</div>
               </div>
@@ -55,7 +55,8 @@ export default {
   },
   methods: {
     indexcouseGet() {
-      this.rq.requests.get('/allCourse',{}).then(function (response){
+      this.rq.requests.get('/allCourse',{})
+        .then(function (response){
         console.log(response.data);
         this.courselist = response.data.data;
       }.bind(this)).catch(function (error){
@@ -64,6 +65,7 @@ export default {
     },
     cli(name,id){
       //点击事件
+      console.log("点击了"+id)
       this.getTask(id);
       this.open1(name);
     },

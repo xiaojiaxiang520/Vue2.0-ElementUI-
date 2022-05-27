@@ -61,7 +61,7 @@ export default {
               if(response.data.code === 200)
               {
                 localStorage.setItem('token',response.data.data.token)
-                localStorage.setItem('ms_username', response.data.data.user.username);
+                localStorage.setItem('ms_username', response.data.data.user.Username);
 
                 //设置当前路由的地址为/
                 this.$router.push('/admin');
